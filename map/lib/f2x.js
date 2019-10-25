@@ -49,7 +49,6 @@ class GameState {
 			this.isTouch = !0;
 			if (!this.isMove) return;
 			let a = data.data.originalEvent;
-
 			if ('ontouchstart' in window) {
 				this.scroller.doTouchStart(a.touches, a.timeStamp)
 			} else {
@@ -71,7 +70,6 @@ class GameState {
 						pageY: a.pageY
 					}], a.timeStamp, a.scale);
 				}
-
 			}
 		}).on("pointerup", (e) => {
 			this.isTouch = !1;
@@ -85,26 +83,20 @@ class GameState {
 			this.scroller.doTouchEnd(a.timeStamp);
 		})
 
-
 		this.scroller.setDimensions(this.width, this.height, 3000, 3000);
-
 		this.Textures = {
 			left: null,
 			right: null,
 			top: null,
 			bottom: null
 		};
-
 		this.app.stage.addChild(this.container);
 		this.createMap();
 		this.createPoint();
 
-
 		let startPos = this.container.getChildByName('point0').getGlobalPosition();
-
 		// 人物
 		this.Textures.left = switchTextures(this.resources.left); //默认方向
-
 		this.MoveClip = new PIXI.extras.AnimatedSprite(this.Textures.left);
 		this.MoveClip.x = this.MoveClip.x + (this.MoveClip.width / 2);
 		this.MoveClip.y = this.MoveClip.y + (150);
@@ -112,7 +104,6 @@ class GameState {
 		this.MoveClip.animationSpeed = 0.5;
 		this.MoveClip.stop();
 		this.MoveClip.position.set(startPos.x, startPos.y);
-
 		this.container.addChild(this.MoveClip);
 
 		// 开始按钮
@@ -133,10 +124,8 @@ class GameState {
 				let symbol = Math.random() >= 0.5 ? '+' : '-';
 				// 默认每次起步 +
 				this.symbol = '+';
-
 				console.log('走' + steps + '步数')
 				console.log(this.isMove)
-
 				// 先移动动屏幕中间
 				this.moveToCenter().then(() => {
 					this.moveTo(steps)
@@ -162,7 +151,6 @@ class GameState {
 					}
 				});
 			} else if (obj.mapData.type == 2) {
-
 				Gx.$message({
 					'title': '恭喜您',
 					'content': `前进：${obj.mapData.num}步`,
@@ -173,9 +161,7 @@ class GameState {
 						});
 					}
 				});
-
 			} else if (obj.mapData.type == 3) {
-
 				Gx.$message({
 					'title': '很遗憾',
 					'content': `后退：${obj.mapData.num}步`,
@@ -198,7 +184,6 @@ class GameState {
 		let __scrollTop = this.scroller.__scrollTop;
 		let left = Point.x - this.width / 2;
 		let top = Point.y - this.height / 2;
-
 		let distance = getDistance({ x: __scrollLeft, y: __scrollTop }, { x: left, y: top });
 
 		//控制移动到中心点时间 最快为0 最慢 0.4; 保留2位小数
@@ -216,17 +201,13 @@ class GameState {
 		})
 	}
 
-	// 思考 如何倒着走？
+	// 倒退
 
 	moveTo(moveCount) {
 		let f = this;
-
 		if (moveCount == 0) {
-
 			// 避免到了拐角处 方向错误
-
 			let currentIndex = this.currentIndex;
-
 			if (this.symbol === '+') {
 				currentIndex++
 				if (currentIndex > 99) {
@@ -238,9 +219,7 @@ class GameState {
 					currentIndex = 99;
 				}
 			}
-
 			let Point = this.mapData['point' + currentIndex];
-
 			let angle = getAtan2(Point, this.MoveClip) * 180 / Math.PI;
 			let direction = this.getDirection(angle);
 			// 如果不存在 就创建一个
@@ -248,7 +227,6 @@ class GameState {
 				this.Textures[direction] = switchTextures(this.resources[direction]); // 重新生成
 			}
 			this.MoveClip.textures = this.Textures[direction];
-
 			this.MoveClip.stop();
 			this.isMove = true;
 			// 用于当前停留派发
@@ -277,18 +255,14 @@ class GameState {
 
 		let Point = this.mapData['point' + this.currentIndex];
 		let angle = getAtan2(Point, this.MoveClip) * 180 / Math.PI;
-
-		// 27是 将地图旋转正后的角度
+		// 将地图旋转正后的角度是27
 		let direction = this.getDirection(angle);
-
-
 		// 如果不存在 就创建一个
 		if (!this.Textures[direction]) {
 			// 重新生成
 			this.Textures[direction] = switchTextures(this.resources[direction]);
 		}
 		this.MoveClip.textures = this.Textures[direction];
-
 		this.MoveClip.play();
 
 		// 移动位置
@@ -365,7 +339,6 @@ class GameState {
 			// 正常路线 颜色
 			graphics.beginFill(0xe28c99, 1);
 		}
-
 		// 道路原点大小
 		graphics.drawCircle(0, 0, 9);
 		graphics.endFill();
@@ -375,12 +348,10 @@ class GameState {
 }
 
 let resource = [];
-
 // 地图加载
 for (var i = 1; i < 13; i++) {
 	resource.push(`images/map/${i}.jpg`);
 }
-
 let Loader = new PIXI.loaders.Loader();
 Loader.defaultQueryString = '123'
 Loader.add('goblins', 'images/data.json');
@@ -396,9 +367,7 @@ let sence = null;
 
 Loader.load(function (res) {
 	sence = new GameState(res.resources);
-
 	// console.log(sence)
-
 	document.body.appendChild(sence.app.view);
 	// 重置加载
 	Loader.reset();
