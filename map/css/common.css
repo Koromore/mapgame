@@ -1,0 +1,85 @@
+/* CSS Document */
+
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background-color: #fff;
+}
+
+section {
+  position: absolute;
+  width: 750px;
+  height: 100%;
+  overflow: hidden;
+}
+
+img {
+  border: none;
+  border: 0px;
+}
+
+a,
+img {
+  -webkit-touch-callout: none;
+}
+
+a {
+  text-decoration: none;
+  border: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+#loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  z-index: 200;
+}
+
+
+#loading .load {
+  width: 276px;
+  height: 345px;
+  background-size: 3312px 345px;
+  background-position: 0px 0px;
+  background-image: url('../images/e3.png');
+  position: absolute;
+  top: 580px;
+  left: 237px;
+  z-index: 9999;
+  -webkit-transform-origin: bottom center;
+  transform-origin: bottom center;
+  -webkit-animation: loadingAni 1.8s linear infinite;
+  -webkit-animation-timing-function: step-start;
+  animation-timing-function: step-start;
+}
+
+#play {
+  width: 312px;
+  height: 123px;
+  position: absolute;
+  top: 880px;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0%);
+  transform: translate(-50%, 0%);
+  z-index: 999;
+  display: none;
+}
+
+#loading #progress {
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  font-size: 30px;
+  color: #000;
+  top: 520px;
+  text-align: center;
+}
