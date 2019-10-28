@@ -83,7 +83,7 @@ class GameState {
 			this.scroller.doTouchEnd(a.timeStamp);
 		})
 
-		this.scroller.setDimensions(this.width, this.height, 3000, 3000);
+		this.scroller.setDimensions(this.width, this.height, 3000, 1720);
 		this.Textures = {
 			left: null,
 			right: null,
@@ -120,7 +120,7 @@ class GameState {
 				this.isMove = false;
 				// this.isMove --
 				// let steps = randnum(1, 2);
-				let steps = 3;
+				let steps = 99;
 				let symbol = Math.random() >= 0.5 ? '+' : '-';
 				// 默认每次起步 +
 				this.symbol = '+';
@@ -210,13 +210,13 @@ class GameState {
 			let currentIndex = this.currentIndex;
 			if (this.symbol === '+') {
 				currentIndex++
-				if (currentIndex > 99) {
+				if (currentIndex > 221) {
 					currentIndex = 0;
 				}
 			} else {
 				currentIndex--;
 				if (currentIndex < 0) {
-					currentIndex = 99;
+					currentIndex = 221;
 				}
 			}
 			let Point = this.mapData['point' + currentIndex];
@@ -240,14 +240,14 @@ class GameState {
 		if (this.symbol === '+') {
 			// 前进
 			this.currentIndex++;
-			if (this.currentIndex > 99) {
+			if (this.currentIndex > 221) {
 				this.currentIndex = 0;
 			}
 		} else {
 			// 后退
 			this.currentIndex--;
 			if (this.currentIndex < 0) {
-				this.currentIndex = 99;
+				this.currentIndex = 221;
 			}
 		}
 
@@ -354,7 +354,7 @@ for (var i = 1; i < 13; i++) {
 }
 let Loader = new PIXI.loaders.Loader();
 Loader.defaultQueryString = '123'
-Loader.add('goblins', 'images/data.json');
+Loader.add('goblins', 'json/data.json');
 Loader.add('left', 'images/left.json');
 Loader.add('button', 'images/play.png');
 Loader.add('right', 'images/right.json');
