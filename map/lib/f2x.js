@@ -124,8 +124,8 @@ class GameState {
 				let symbol = Math.random() >= 0.5 ? '+' : '-';
 				// 默认每次起步 +
 				this.symbol = '+';
-				console.log('走' + steps + '步数')
-				console.log(this.isMove)
+				// console.log('走' + steps + '步数')
+				// console.log(this.isMove)
 				// 先移动动屏幕中间
 				this.moveToCenter().then(() => {
 					this.moveTo(steps)
