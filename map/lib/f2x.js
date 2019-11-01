@@ -96,7 +96,8 @@ class GameState {
 
 		let startPos = this.container.getChildByName('point0').getGlobalPosition();
 		// 人物
-		this.Textures.left = switchTextures(this.resources.left); //默认方向
+		this.Textures.left = switchTextures(this.resources.left);
+		//默认方向
 		this.MoveClip = new PIXI.extras.AnimatedSprite(this.Textures.left);
 		this.MoveClip.x = this.MoveClip.x + (this.MoveClip.width / 2);
 		this.MoveClip.y = this.MoveClip.y + (150);
@@ -120,7 +121,7 @@ class GameState {
 				this.isMove = false;
 				// this.isMove --
 				// let steps = randnum(1, 2);
-				let steps = 99;
+				let steps = 222;
 				let symbol = Math.random() >= 0.5 ? '+' : '-';
 				// 默认每次起步 +
 				this.symbol = '+';
@@ -340,7 +341,7 @@ class GameState {
 			graphics.beginFill(0xe28c99, 1);
 		}
 		// 道路原点大小
-		graphics.drawCircle(0, 0, 9);
+		graphics.drawCircle(0, 0, 6);
 		graphics.endFill();
 		graphics.position.set(point.x, point.y);
 		return graphics;
